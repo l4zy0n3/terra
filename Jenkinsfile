@@ -4,7 +4,11 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-                echo 'Hello World'
+                sh """
+                    export TF_LOG=1
+                    terraform plan
+                    terraform ally
+                """
             }
         }
     }

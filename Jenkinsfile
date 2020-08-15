@@ -29,7 +29,7 @@ pipeline {
                           		-var "ssh_fingerprint=${ssh_fingerprint}"
                 	"""
 			script {
-                    		if ($destroy == true) {
+				if ("${destroy}" == true) {
                         		stage ('Destroy') {
                             			sh """
 							terraform destroy \

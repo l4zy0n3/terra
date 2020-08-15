@@ -21,10 +21,8 @@ resource "digitalocean_droplet" "workers" {
             # install deno and run server
             "sudo apt-get update",
             "sudo apt-get -y install curl unzip",
-            "git clone https://github.com/l4zy0n3/deno-example.git",
             "curl -fsSL https://deno.land/x/install/install.sh | sh",
-            "cd deno-example",
-            "/root/.deno/bin/deno run --allow-net main.ts"
+            "/root/.deno/bin/deno run --allow-net https://deno.land/std@0.63.0/examples/echo_server.ts"
         ]
     }
 }

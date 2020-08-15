@@ -7,7 +7,7 @@ pipeline {
                     def tfHome = tool name: 'Terraform'
                     env.PATH = "${tfHome}:${env.PATH}"
                 }
-                sh 'terraform — version'
+                sh 'terraform --version'
             }
         }
         stage('Create Infra') {
@@ -15,7 +15,7 @@ pipeline {
                 sh """
                     export TF_LOG=1
                     terraform plan
-                    terraform ally
+                    terraform apply
                 """
             }
         }

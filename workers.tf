@@ -20,9 +20,9 @@ resource "digitalocean_droplet" "workers" {
             "export PATH=$PATH:/usr/bin",
             # install deno and run server
             "sudo apt-get update",
-            "sudo apt-get -y install curl unzip",
-            "curl -fsSL https://deno.land/x/install/install.sh | sh",
-            "/root/.deno/bin/deno run --allow-net https://deno.land/std@0.63.0/examples/echo_server.ts &"
+            "sudo apt-get install docker -y",
+            "sudo systemctl enable docker",
+            "sudo systemctl start docker"
         ]
     }
 }

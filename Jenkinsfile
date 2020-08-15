@@ -24,7 +24,8 @@ pipeline {
 				echo "Destroy : ${destroy}"
                     	"""	
 			script {
-				if (create) {
+				
+				if (env.create.toBoolean()) {
                         		stage ('Create') {
                             			sh """
 							terraform apply \
@@ -38,7 +39,7 @@ pipeline {
                     		}
                 	}
 			script {
-				if (destroy) {
+				if (env.destroy.toBoolean()) {
                         		stage ('Destroy') {
                             			sh """
 							terraform destroy \

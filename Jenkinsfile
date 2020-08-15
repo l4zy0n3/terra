@@ -24,9 +24,8 @@ pipeline {
 				echo "Destroy : ${destroy}"
                     	"""	
 			script {
-				
-				if (env.create.toBoolean()) {
-                        		stage ('Create') {
+				stage ('Create') {
+					if (env.create.toBoolean()) {
                             			sh """
 							terraform apply \
                           					-auto-approve \
@@ -36,12 +35,15 @@ pipeline {
                           					-var "ssh_fingerprint=${ssh_fingerprint}"
 						"""
                         		}
+					else {
+						echo "Not Creating"
+					}
                     		}
                 	}
 			script {
-				if (env.destroy.toBoolean()) {
-                        		stage ('Destroy') {
-                            			sh """
+                        	stage ('Destroy') {
+                            		if (env.destroy.toBoolean()) {
+						sh """
 							terraform refresh \
                          					-var "do_token=${do_token}" \
                           					-var "pub_key=${yt_public_key}" \
@@ -55,6 +57,9 @@ pipeline {
                           					-var "ssh_fingerprint=${ssh_fingerprint}"
 						"""
                         		}
+					else {
+						echo "Not Destroying"
+					}
                     		}
                 	}
 		}

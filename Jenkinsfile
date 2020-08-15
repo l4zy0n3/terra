@@ -14,6 +14,7 @@ pipeline {
             steps {
                 sh """
                     export TF_LOG=1
+                    terraform init
                     terraform plan \
                           -var "do_token=${do_token}" \
                           -var "pub_key=${yt_public_key}" \

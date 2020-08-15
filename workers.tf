@@ -19,10 +19,9 @@ resource "digitalocean_droplet" "workers" {
         inline = [
             "export PATH=$PATH:/usr/bin",
             # install deno and run server
-            "sudo apt-get update",
-            "sudo apt-get install docker -y",
-            "sudo systemctl enable docker",
-            "sudo systemctl start docker",
+            "curl -fsSL https://get.docker.com -o get-docker.sh",
+            "sudo sh get-docker.sh",
+            "sudo usermod -aG docker root",
             "docker run -p8000:8000 l4zy/notes:dev"
         ]
     }

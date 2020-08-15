@@ -17,7 +17,7 @@ pipeline {
                     		export TF_LOG="INFO"
                     		terraform init
                     		terraform refresh \
-                          		-var "do_token=${do_token}" \
+                          		-var "do_token=${do_token}"
 				terraform plan \
                           		-var "do_token=${do_token}" \
                           		-var "pub_key=${yt_public_key}" \

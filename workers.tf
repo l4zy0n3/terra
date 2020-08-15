@@ -22,7 +22,7 @@ resource "digitalocean_droplet" "workers" {
             "curl -fsSL https://get.docker.com -o get-docker.sh",
             "sudo sh get-docker.sh",
             "sudo usermod -aG docker root",
-            "docker run -p8000:8000 l4zy/notes:dev"
+            "docker run -d -p8000:8000 l4zy/notes:dev"
         ]
     }
 }

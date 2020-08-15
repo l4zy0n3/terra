@@ -10,7 +10,7 @@ pipeline {
                 sh 'terraform --version'
             }
         }
-        stage('Create Infra') {
+        stage('Plan Infra') {
             steps {
                 withCredentials([file(credentialsId: 'yt_private_key', variable: 'yt_private_key'), file(credentialsId: 'yt_public_key', variable: 'yt_public_key'), string(credentialsId: 'DO_PAT', variable: 'do_token'), string(credentialsId: 'yt_ssh', variable: 'ssh_fingerprint')]) {
 			sh """
@@ -42,6 +42,11 @@ pipeline {
 				if (env.destroy.toBoolean()) {
                         		stage ('Destroy') {
                             			sh """
+							terraform refresh \
+                         					-var "do_token=${do_token}" \
+                          					-var "pub_key=${yt_public_key}" \
+                          					-var "pvt_key=${yt_private_key}" \
+                          					-var "ssh_fingerprint=${ssh_fingerprint}"
 							terraform destroy \
 								-auto-approve \
                           					-var "do_token=${do_token}" \

@@ -14,21 +14,26 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'yt_private_key', variable: 'yt_private_key'), file(credentialsId: 'yt_public_key', variable: 'yt_public_key'), string(credentialsId: 'DO_PAT', variable: 'do_token'), string(credentialsId: 'yt_ssh', variable: 'ssh_fingerprint')]) {
 			sh """
-                    		export TF_LOG="INFO"
                     		terraform init
                     		terraform plan \
-                          		-var "do_token=${do_token}" \
+                         		-var "do_token=${do_token}" \
                           		-var "pub_key=${yt_public_key}" \
                           		-var "pvt_key=${yt_private_key}" \
                           		-var "ssh_fingerprint=${ssh_fingerprint}"
-                    		terraform apply \
-                          		-auto-approve \
-			  		-var "do_token=${do_token}" \
-                          		-var "pub_key=${yt_public_key}" \
-                          		-var "pvt_key=${yt_private_key}" \
-                          		-var "ssh_fingerprint=${ssh_fingerprint}"
-                	"""
+                    	"""	
 			script {
+				if ("${create}" == true) {
+                        		stage ('Create') {
+                            			sh """
+							terraform apply \
+                          					-auto-approve \
+			  					-var "do_token=${do_token}" \
+                          					-var "pub_key=${yt_public_key}" \
+                          					-var "pvt_key=${yt_private_key}" \
+                          					-var "ssh_fingerprint=${ssh_fingerprint}"
+						"""
+                        		}
+                    		}
 				if ("${destroy}" == true) {
                         		stage ('Destroy') {
                             			sh """

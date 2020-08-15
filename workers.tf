@@ -22,7 +22,8 @@ resource "digitalocean_droplet" "workers" {
             "sudo apt-get update",
             "sudo apt-get install docker -y",
             "sudo systemctl enable docker",
-            "sudo systemctl start docker"
+            "sudo systemctl start docker",
+            "docker pull l4zy/notes:dev"
         ]
     }
 }

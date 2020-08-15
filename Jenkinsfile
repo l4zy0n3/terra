@@ -35,7 +35,7 @@ pipeline {
                           					-var "ssh_fingerprint=${ssh_fingerprint}"
 							git add terraform.tfstate
 							git commit -m 'updated tfstate'
-							git push
+							git push -u origin master
 						"""
                         		}
 					else {

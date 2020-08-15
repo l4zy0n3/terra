@@ -20,7 +20,7 @@ variable "server_size" {
 
 variable "server_count" {
     type = string
-    default = "3"
+    default = "1"
 }
  
 variable "region" {

@@ -33,6 +33,9 @@ pipeline {
                           					-var "pub_key=${yt_public_key}" \
                           					-var "pvt_key=${yt_private_key}" \
                           					-var "ssh_fingerprint=${ssh_fingerprint}"
+							git add terraform.tfstate
+							git commit -m 'updated tfstate'
+							git push
 						"""
                         		}
 					else {

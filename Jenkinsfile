@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Create Infra') {
             steps {
                 sh """
                     export PATH=$PATH:~/opt/terraform/bin

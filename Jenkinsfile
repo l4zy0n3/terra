@@ -44,7 +44,7 @@ pipeline {
                         	stage ('Destroy') {
                             		if (env.destroy.toBoolean()) {
 						sh """
-							terraform refresh \
+							terraform import \
                          					-var "do_token=${do_token}" \
                           					-var "pub_key=${yt_public_key}" \
                           					-var "pvt_key=${yt_private_key}" \

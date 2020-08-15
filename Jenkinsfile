@@ -36,6 +36,8 @@ pipeline {
 						"""
                         		}
                     		}
+                	}
+			script {
 				if (destroy) {
                         		stage ('Destroy') {
                             			sh """

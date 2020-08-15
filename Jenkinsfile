@@ -21,7 +21,8 @@ pipeline {
                           -var "pvt_key=${yt_private_key}" \
                           -var "ssh_fingerprint=${ssh_fingerprint}"
                     terraform apply \
-                          -var "do_token=${do_token}" \
+                          -auto-approve \
+			  -var "do_token=${do_token}" \
                           -var "pub_key=${yt_public_key}" \
                           -var "pvt_key=${yt_private_key}" \
                           -var "ssh_fingerprint=${ssh_fingerprint}"

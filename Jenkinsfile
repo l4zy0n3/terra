@@ -13,7 +13,7 @@ pipeline {
         stage('Create Infra') {
             steps {
                 sh """
-                    export TF_LOG=1
+                    export TF_LOG="DEBUG"
                     terraform init
                     terraform plan \
                           -var "do_token=${do_token}" \
